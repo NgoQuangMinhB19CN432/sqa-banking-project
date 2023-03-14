@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Banking Account Information</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>bank account information:</h2>
+        
+        <label>bank account number:</label>
+        <span th:text="${a.bankAccountNumber}"></span>
+        
+        <label>money:</label>
+        <span th:text="${a.money}"></span>
+        
+        <label>credit score:</label>
+        <span th:text="${a.creditScore}"></span>
+        
+        <div name="mini-container">
+            <table border="1">
+                <tr>
+                    <th>saving id</th>
+                    <th>date</th>
+                    <th>original money</th>
+                    <th>interest rate</th>
+                    <th>total money</th>
+                    <th>kind of profit</th>
+                </tr>
+            
+                <tr th:each="s: ${savings}">
+                    <td th:text="${s.savingId}"></td>
+                    <td th:text="${s.date}"></td>
+                    <td th:text="${s.originalMoney}"></td>
+                    <td th:text="${s.interestRate}"></td>
+                    <td th:text="${s.totalMoney}"></td>
+                    <td th:text="${s.kindOfProfit}"></td>
+                </tr>
+            </table>
+            
+            <table border="1">
+                <tr>
+                    <th>credit id</th>
+                    <th>money</th>
+                    <th>borrow-pay day</th>
+                    <th>interest rate</th>
+                    <th>mortgage</th>
+                </tr>
+            
+                <tr th:each="c: ${credits}">
+                    <td th:text="${c.creditId}"></td>
+                    <td th:text="'${c.borrowDay}' + 'to' + '${c.payDay}'"></td>
+                    <td th:text="${c.interestRate}"></td>
+                    <td th:text="${c.mortgage}"></td>
+                </tr>
+            </table>
+        </div>
+        <button><a th:href="/menu">back</a></button>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>customer information:</h2>
+        
+        <label>name:</label>
+        <span th:text="${c.name}"></span>
+        
+        <label>age:</label>
+        <span th:text="${c.age}"></span>
+        
+        <label>phonen number:</label>
+        <span th:text="${c.phoneNumber}"></span>
+        
+        <label>address:</label>
+        <span th:text="${c.address}"></span>
+        
+        <label>job:</label>
+        <span th:text="${c.job}"></span>
+        
+        <button><a th:href="/menu">back</a></button>
+    </body>
+</html>
