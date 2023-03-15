@@ -28,16 +28,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <th>date</th>
                     <th>original money</th>
                     <th>interest rate</th>
-                    <th>total money</th>
                     <th>kind of profit</th>
                 </tr>
             
                 <tr th:each="s: ${savings}">
                     <td th:text="${s.savingId}"></td>
-                    <td th:text="${s.date}"></td>
+                    <td th:text="${s.toDate}"></td>
                     <td th:text="${s.originalMoney}"></td>
                     <td th:text="${s.interestRate}"></td>
-                    <td th:text="${s.totalMoney}"></td>
                     <td th:text="${s.kindOfProfit}"></td>
                 </tr>
             </table>

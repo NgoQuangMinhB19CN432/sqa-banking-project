@@ -12,26 +12,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 /**
  *
  * @author Minh ngo
  */
-@Setter
-@Getter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "Customer")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private String id;
     
     @Column(name="fullname")
@@ -58,4 +51,5 @@ public class Customer {
     @OneToOne
     @JoinColumn(name = "bankAccountNumber")
     private BankAccount bankAccount;
+    
 }

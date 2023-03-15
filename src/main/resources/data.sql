@@ -42,6 +42,7 @@ CREATE TABLE Credit (
   mortgage VARCHAR(20) NOT NULL,
   bankAccountNumber VARCHAR(20), FOREIGN KEY(bankAccountNumber) REFERENCES BankAccount(bankAccountNumber)
 );
+
 INSERT INTO BankAccount (bankAccountNumber, money, creditScore) VALUES
   ('12345678', 5000000, 8.8),
   ('23456789', 100000, 4.5);

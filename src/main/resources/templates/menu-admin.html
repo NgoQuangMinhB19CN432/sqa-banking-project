@@ -11,13 +11,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
         <h1>Banking Account:</h1>
-        <div th:text="${message}"></div>
-<!--        <table border="1">
+        <table border="1">
             <tr>
                 <th>Id user</th>
                 <th>Name</th>
                 <th>Bank Account Number</th>
-                <th>Credit Score</th>
                 <th>Option</th>
             </tr>
             
@@ -25,12 +23,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <td th:text="${c.id}"></td>
                 <td th:text="${c.name}"></td>
                 <td th:text="${c.bankAccount.bankAccountNumber}"></td>
-                <td th:text="${c.bankAccount.creditScore}"></td>
                 <td>
                     <a th:href="@{'/saving?id=' + '${c.id}'}">view user information</a>
                     <a th:href="@{'/credit?id=' + '${c.bankAccount.bankAccountNumber}'}">view banking account information</a>
                 </td>
             </tr>
-        </table>-->
+        </table>
     </body>
 </html>

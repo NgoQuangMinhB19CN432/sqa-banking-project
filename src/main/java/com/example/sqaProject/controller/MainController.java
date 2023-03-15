@@ -43,23 +43,21 @@ public class MainController {
     @RequestMapping(value="/menu")
     public String menu(Model model) {
         List <Customer> c = CustomerRepo.findAll(); 
-        String message = "no";
-        if(c.isEmpty()) message="yes";
-        model.addAttribute("message", message);
+        model.addAttribute("customers", c);
         return "menu-admin";
     }
     
-//    @RequestMapping(value="/account")
-//    public String AccountBanking(@RequestParam("id") String bankAccountNumber, Model model) {
-//        Optional<BankAccount> a = BankAccountRepo.findById(bankAccountNumber);
-//        model.addAttribute("account", a);
-//        return "banking-account-information";
-//    }
-//    
-//    @RequestMapping(value="/user")
-//    public String Customer(@RequestParam("id") String id, Model model) {
-//        Optional<Customer> c = CustomerRepo.findById(id);
-//        model.addAttribute("account", c);
-//        return "user-information";
-//    }
+    @RequestMapping(value="/account")
+    public String AccountBanking(@RequestParam("id") String bankAccountNumber, Model model) {
+        Optional<BankAccount> a = BankAccountRepo.findById(bankAccountNumber);
+        model.addAttribute("account", a);
+        return "banking-account-information";
+    }
+    
+    @RequestMapping(value="/user")
+    public String Customer(@RequestParam("id") String id, Model model) {
+        Optional<Customer> c = CustomerRepo.findById(id);
+        model.addAttribute("account", c);
+        return "user-information";
+    }
 }
