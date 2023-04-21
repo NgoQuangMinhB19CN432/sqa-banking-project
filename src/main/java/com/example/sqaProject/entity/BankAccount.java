@@ -1,40 +1,47 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.sqaProject.entity;
 
-import jakarta.persistence.CascadeType;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.List;
-import lombok.Data;
+import java.text.DecimalFormat;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- *
- * @author Minh ngo
- */
-@Data
 @Entity
-@Table(name = "BankAccount")
+@Getter
+@Setter
+@Table(name = "bank_account")
 public class BankAccount {
     @Id
-    @Column(name="bankAccountNumber")
+    @Column(name="bank_account_number")
     private String bankAccountNumber;
     
     @Column(name="money")
-    private int money;
+    private float money;
+    private String formattedMoney;
     
-    @JoinColumn(name="creditScore")
+    @Column(name="credit_score")
     private float creditScore;
     
-    @OneToMany(mappedBy = "bankAccountNumber", cascade = CascadeType.ALL)
+    @Column(name="fullname")
+    private String fullname ;
+    @Column(name="age")
+    private int age;
+    @Column(name="address")
+    private String address;
+    @Column(name="phonenumber")
+    private String phonenumber;
+    @Column(name="username")
+    private String username;
+    @Column(name="password")
+    private String password;
+    @OneToMany(mappedBy = "bankAccount")
     List <Credit> credits;
     
-    @OneToMany(mappedBy = "bankAccountNumber", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bankAccount")
     List <Saving> savings;
 }

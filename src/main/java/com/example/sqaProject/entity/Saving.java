@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.sqaProject.entity;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,33 +9,37 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import java.text.DecimalFormat;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- *
- * @author Minh ngo
- */
-@Data
 @Entity
-@Table(name = "Saving")
+@Table(name = "saving")
+@Getter
+@Setter
 public class Saving {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int savingId;
     
     @Column(name="toDate")
     private String toDate;
     
     @Column(name="originalMoney")
-    private int originalMoney;
-    
-    @Column(name="interestRate")
-    private float interestRate;
+    private float originalMoney;
+    private String formattedOriginalMoney;
     
     @Column(name="kindOfProfit")
     private String kindOfProfit;
     
     @ManyToOne 
     @JoinColumn(name = "bankAccountNumber")
-    private BankAccount bankAccountNumber;
+    private BankAccount bankAccount;
+    
+    @ManyToOne 
+    @JoinColumn(name = "saving_term_id")
+    private SavingTerm sTerm;
+    
+    @JoinColumn(name = "status")
+    private int status;
 }

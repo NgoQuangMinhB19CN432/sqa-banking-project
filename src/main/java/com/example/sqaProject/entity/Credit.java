@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.sqaProject.entity;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,36 +9,42 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import java.text.DecimalFormat;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- *
- * @author Minh ngo
- */
-@Data
 @Entity
-@Table(name = "Credit")
+@Table(name = "credit")
+@Getter
+@Setter
 public class Credit {
+    DecimalFormat formatter = new DecimalFormat("#,###.00");
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int creditId;
     
     @Column(name="money")
-    private int money;
+    private float money;
+    public String formattedMoney;
     
     @Column(name="borrowDay")
     private String borrowDay;
     
     @Column(name="payDay")
-    private String payDay;
-    
-    @Column(name="interestRate")
-    private float interestRate;
+    private String payDay;  
     
     @Column(name="mortgage")
     private String mortgage;
     
     @ManyToOne 
     @JoinColumn(name = "bankAccountNumber")
-    private BankAccount bankAccountNumber;
+    private BankAccount bankAccount;
+    
+    @ManyToOne
+    @JoinColumn(name = "creditTerm_id")
+    private CreditTerm cTerm; 
+    
+    @Column(name="status")
+    private int status;
 }
