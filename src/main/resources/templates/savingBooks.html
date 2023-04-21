@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8" />
+
+	<meta name="description" content="User login page" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<title>Trang chủ</title>
+	<link rel="stylesheet" th:href="@{assets/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{assets/font-awesome/4.1.0/css/font-awesome.min.css}" />
+	<link rel="stylesheet" th:href="@{assets/font-awesome/4.2.0/css/font-awesome.min.css}" />
+	<link rel="stylesheet" th:href="@{assets/css/ace.min.css}" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet"
+		th:href="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css}" />
+	<script src="assets/js/ace-extra.min.js"></script>
+	<link rel="stylesheet"
+		th:href="@{https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css}" />
+	<link rel="stylesheet" th:href="@{//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}" />
+	<link rel="stylesheet" th:href="@{//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/java-spring-mvc/template/admin/js/jquery-2.2.3.min.js"></script>
+	<script src="assets/js/jquery.2.1.1.min.js"></script>
+	<link rel="stylesheet" th:href="@{//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}" />
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<!--<script src="/java-spring-mvc/template/paging/jquery.twbsPagination.js"></script>-->
+	<!--  <script src="/java-spring-mvc/ckeditor/ckeditor.js"></script>-->
+	<style type="text/css">
+		.jqstooltip {
+			position: absolute;
+			left: 0px;
+			top: 0px;
+			visibility: hidden;
+			background: rgb(0, 0, 0) transparent;
+			background-color: rgba(0, 0, 0, 0.6);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+			color: white;
+			font: 10px arial, san serif;
+			text-align: left;
+			white-space: nowrap;
+			padding: 5px;
+			border: 1px solid white;
+			z-index: 10000;
+		}
+
+		.jqsfield {
+			color: white;
+			font: 10px arial, san serif;
+			text-align: left;
+		}
+	</style>
+</head>
+
+<body class="no-skin">
+	<!-- header -->
+	<div id="navbar" class="navbar navbar-default ace-save-state">
+		<div class="navbar-container ace-save-state" id="navbar-container">
+			<div class="navbar-header pull-left">
+				<a href="#" class="navbar-brand"> <small> <i class="fa fa-leaf"></i> Trang quản trị
+					</small>
+				</a>
+			</div>
+			<div class="navbar-buttons navbar-header pull-right collapse navbar-collapse" role="navigation">
+				<ul class="nav ace-nav">
+					<li class="light-blue dropdown-modal"><a data-toggle="dropdown" href="#" class="dropdown-toggle">
+							<span th:text="'Xin chào,'+${session.name}"></span></a>
+					</li>
+					<li class="light-blue dropdown-modal"><a href="/java-spring-mvc/thoat"> <i
+								class="ace-icon fa fa-power-off"></i> Thoát</a>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- header -->
+
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {ace.settings.check('main-container', 'fixed')} catch (e) {}
+		</script>
+		<!-- header -->
+
+
+
+
+
+
+
+		<div id="sidebar" class="sidebar responsive ace-save-state" data-sidebar="true" data-sidebar-scroll="true"
+			data-sidebar-hover="true">
+			<script type="text/javascript">
+				try {ace.settings.loadState('sidebar')} catch (e) {}
+			</script>
+			<div class="sidebar-shortcuts">
+				<div class="sidebar-shortcuts-large">
+					<button class="btn btn-success">
+						<i class="ace-icon fa fa-signal"></i>
+					</button>
+
+					<button class="btn btn-info">
+						<i class="ace-icon fa fa-pencil"></i>
+					</button>
+
+					<button class="btn btn-warning">
+						<i class="ace-icon fa fa-users"></i>
+					</button>
+
+					<button class="btn btn-danger">
+						<i class="ace-icon fa fa-cogs"></i>
+					</button>
+				</div>
+				<div class="sidebar-shortcuts-mini">
+					<span class="btn btn-success"></span>
+
+					<span class="btn btn-info"></span>
+
+					<span class="btn btn-warning"></span>
+
+					<span class="btn btn-danger"></span>
+				</div>
+			</div>
+			<ul class="nav nav-list">
+				<li>
+					<a href="#" class="dropdown-toggle">
+						<i class="menu-icon fa fa-list"></i>
+						<span class="menu-text"></span>
+						Quản lý sổ tiết kiệm
+						<b class="arrow fa fa-angle-down"></b>
+					</a>
+					<b class="arrow"></b>
+					<ul class="submenu">
+						<li>
+							<a href="/SavingBooks">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Danh sách sổ tiết kiệm
+							</a>
+							<b class="arrow"></b>
+						</li>
+						<li>
+							<a href="/saving-config">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Cấu hình
+							</a>
+							<b class="arrow"></b>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" class="dropdown-toggle">
+						<i class="menu-icon fa fa-list"></i>
+						<span class="menu-text"></span>
+						Quản lý sổ vay
+						<b class="arrow fa fa-angle-down"></b>
+					</a>
+					<b class="arrow"></b>
+					<ul class="submenu">
+						<li>
+							<a href="/Credits">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Danh sách sổ vay
+							</a>
+							<b class="arrow"></b>
+						</li>
+						<li>
+							<a href="/credit-config">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Cấu hình
+							</a>
+							<b class="arrow"></b>
+						</li>
+					</ul>
+				</li>
+                                <li>
+				    <a href="/ProfitReport">
+				        Báo cáo doanh thu
+				    </a>
+				</li>
+			</ul>
+			<div class="sidebar-toggle sidebar-collapse">
+				<i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left"
+					data-icon2="ace-icon fa fa-angle-double-right"></i>
+			</div>
+		</div>
+		<!-- header -->
+
+
+		<div class="main-content">
+			<div class="main-content-inner">
+				<div class="breadcrumbs ace-save-state" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li>
+							<i class="ace-icon fa fa-home home-icon"></i>
+							<a href="#">Trang chủ</a>
+						</li>
+					</ul><!-- /.breadcrumb -->
+				</div>
+				<div class="page-content">
+					<div class="row">
+						<div class="col-xs-12">
+							
+							<div class="widget-box table-filter">
+								<h3 style="color: black; text-align: center;">Danh sách sổ tiết kiệm</h3>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="table-responsive">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>Số tài khoản</th>
+													<th>Ngày mở sổ</th>
+													<th>Số tiền gốc</th>
+                                                                                                        <th>Mã số của phương thức tính lãi</th>
+													<th>Trạng thái</th>
+												</tr>
+											</thead>
+											<tbody>
+												
+													<tr th:each="sb: ${savingbooks}">
+														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{sb.bankAccount.bankAccountNumber}"></th>
+														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{sb.toDate}"></th>
+														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{sb.originalMoney+' VND'}"></th>
+                                                                                                                <th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{sb.sTerm.savingId}"></th>
+														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{sb.kindOfProfit}"></th>
+													</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.main-content -->
+		<!-- footer -->
+		<div class="footer">
+			<div class="footer-inner">
+				<div class="footer-content">
+					<span class="bigger-120">
+						<span class="blue bolder">SQA Group13 Banking</span>
+						Website© 2023--
+					</span>
+
+					&nbsp; &nbsp;
+					<span class="action-buttons">
+						<a href="#">
+							<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+						</a>
+
+						<a href="#">
+							<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+						</a>
+
+						<a href="#">
+							<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+						</a>
+					</span>
+				</div>
+			</div>
+		</div>
+		<!-- footer -->
+
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse display">
+			<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+		</a>
+	</div>
+
+	<script src="paging/jquery.twbsPagination.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery-ui.custom.min.js"></script>
+	<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="assets/js/jquery.easypiechart.min.js"></script>
+	<script src="assets/js/jquery.sparkline.min.js"></script>
+	<script src="assets/js/jquery.flot.min.js"></script>
+	<script src="assets/js/jquery.flot.pie.min.js"></script>
+	<script src="assets/js/jquery.flot.resize.min.js"></script>
+	<script src="assets/js/ace-elements.min.js"></script>
+	<script src="assets/js/ace.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+
+	<!-- page specific plugin scripts -->
+	<script src="assets/js/jquery-ui.min.js"></script>
+
+</body>
+
+</html>
