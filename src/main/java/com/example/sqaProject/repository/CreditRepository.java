@@ -1,8 +1,11 @@
 package com.example.sqaProject.repository;
 
-import com.example.sqaProject.entity.Credit;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CreditRepository extends JpaRepository<Credit, Integer>{
+import com.example.sqaProject.entity.Credit;
 
+public interface CreditRepository extends JpaRepository<Credit, Integer>{
+		List<Credit> findByBorrowDay(String date);
 }

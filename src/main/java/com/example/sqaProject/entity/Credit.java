@@ -9,42 +9,35 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.text.DecimalFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "credit")
 @Getter
 @Setter
+@Table(name = "credit")
 public class Credit {
-    DecimalFormat formatter = new DecimalFormat("#,###.00");
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int creditId;
     
     @Column(name="money")
     private float money;
-    public String formattedMoney;
     
     @Column(name="borrowDay")
     private String borrowDay;
     
     @Column(name="payDay")
-    private String payDay;  
+    private String payDay;
     
     @Column(name="mortgage")
     private String mortgage;
     
     @ManyToOne 
     @JoinColumn(name = "bankAccountNumber")
-    private BankAccount bankAccount;
+    private BankAccount bankAccountNumber;
     
     @ManyToOne
-    @JoinColumn(name = "creditTerm_id")
-    private CreditTerm cTerm; 
-    
-    @Column(name="status")
-    private int status;
+    @JoinColumn(name = "credit_term_id")
+    private CreditTerm cTerm;    
 }

@@ -239,7 +239,105 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-
+							
+							<div class="widget-box table-filter">
+								<h3 style="color: black; text-align: center;">Số sổ tiệt kiệm được mở trong ngày</h3>
+								<div class="table-btn-controls">
+									<div class="pull-right tableTools-container">
+										<div class="dt-buttons btn-overlap btn-group">
+										
+											<a flag="info" class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip" title="Thêm bài viết" href="/createRole"> <span>
+													<i class="fa fa-plus-circle bigger-110 purple"></i>
+											</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="table-responsive">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th><input type="checkbox" id="checkAll"></th>
+													<th>Mã sổ</th>
+													<th>Tên người gửi</th>
+													<th>Kiểu lợi nhuận</th>
+													<th>Số tiền gửi</th>
+													<th>Gửi từ ngày</th>
+													<th>Kỳ hạn</th>
+													<th>Lãi suất</th>
+												</tr>
+											</thead>
+											<tbody>					
+													<tr th:each="r: ${list1}">
+														<td><input type="checkbox" id="checkbox_1" value="1"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.bankAccountNumber}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.fullname}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.kindOfProfit}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.originalMoney}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.toDate}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.sTerm.numberOfMonth}+' tháng'"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.sTerm.interestRate}+' (%/năm)'"></td>
+													</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							
+							<div class="widget-box table-filter">
+								<h3 style="color: black; text-align: center;">Số sổ tiết kiệm được mở trong tháng</h3>
+								<div class="table-btn-controls">
+									<div class="pull-right tableTools-container">
+									<i th:utext="${message}" style="color:red"></i>
+										<div class="dt-buttons btn-overlap btn-group">
+										
+											<a flag="info" class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip" title="Thêm bài viết" href="/createCreditTerm"> <span>
+													<i class="fa fa-plus-circle bigger-110 purple"></i>
+											</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="table-responsive">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th><input type="checkbox" id="checkAll"></th>
+													<th>Mã sổ</th>
+													<th>Tên người gửi</th>
+													<th>Kiểu lợi nhuận</th>
+													<th>Số tiền gửi</th>
+													<th>Gửi từ ngày</th>
+													<th>Kỳ hạn</th>
+													<th>Lãi suất</th>
+												</tr>
+											</thead>
+											<tbody>					
+													<tr th:each="r: ${list2}">
+														<td><input type="checkbox" id="checkbox_1" value="1"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.bankAccountNumber}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.fullname}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.kindOfProfit}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.originalMoney}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.toDate}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.sTerm.numberOfMonth}+' tháng'"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.sTerm.interestRate}+' (%/năm)'"></td>
+													</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.text.DecimalFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,13 +15,11 @@ import lombok.Setter;
 @Setter
 @Table(name = "bank_account")
 public class BankAccount {
-    @Id
-    @Column(name="bank_account_number")
-    private String bankAccountNumber;
-    
+	@Id
+	@Column(name="id")
+    private int id;
     @Column(name="money")
     private float money;
-    private String formattedMoney;
     
     @Column(name="credit_score")
     private float creditScore;
@@ -39,9 +36,12 @@ public class BankAccount {
     private String username;
     @Column(name="password")
     private String password;
-    @OneToMany(mappedBy = "bankAccount")
+    @Column(name="bank_account_number")
+    private String bankAccountNumber;
+    
+    @OneToMany(mappedBy = "bankAccountNumber")
     List <Credit> credits;
     
-    @OneToMany(mappedBy = "bankAccount")
+    @OneToMany(mappedBy = "bankAccountNumber")
     List <Saving> savings;
 }

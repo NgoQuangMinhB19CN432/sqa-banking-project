@@ -1,6 +1,11 @@
 package com.example.sqaProject.controller;
 
-import com.example.sqaProject.entity.Credit;
+import com.example.sqaProject.entity.CreditTerm;
+import com.example.sqaProject.entity.Role;
+import com.example.sqaProject.entity.SavingTerm;
+import com.example.sqaProject.service.impl.CreditTermService;
+import com.example.sqaProject.service.impl.RoleService;
+import com.example.sqaProject.service.impl.SavingTermService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,23 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.sqaProject.entity.CreditTerm;
-import com.example.sqaProject.entity.Role;
-import com.example.sqaProject.entity.Saving;
-import com.example.sqaProject.entity.SavingTerm;
-import com.example.sqaProject.service.impl.BankAccountService;
-import com.example.sqaProject.service.impl.CreditService;
-import com.example.sqaProject.service.impl.CreditTermService;
-import com.example.sqaProject.service.impl.RoleService;
-import com.example.sqaProject.service.impl.SavingService;
-import com.example.sqaProject.service.impl.SavingTermService;
+
 
 import jakarta.servlet.http.HttpSession;
-import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Controller
 public class ConfigController {
@@ -36,13 +27,7 @@ public class ConfigController {
 	private SavingTermService savingTermService;
 	@Autowired 
 	private CreditTermService creditTermService;
-        
-        @Autowired 
-        private BankAccountService bankAccountService;
-        @Autowired 
-        private CreditService creditService;
-        @Autowired 
-        private SavingService SavingService;
+	
 	
 	@GetMapping("/saving-config")
 	public String savingConfig(HttpSession session, Model model) {
@@ -65,6 +50,11 @@ public class ConfigController {
 		model.addAttribute("role", new Role());
 		return "createRole";
 	}
+	@GetMapping("/createRole1")
+	public String createRole1(Model model) {
+		model.addAttribute("role", new Role());
+		return "createCreditRole";
+	}
 	@PostMapping("/saveRole")
 	public String createRoleT(Role role,BindingResult result,Model model) {
 		if(result.hasErrors()) {
@@ -79,6 +69,21 @@ public class ConfigController {
 		}
 		roleService.save(role);
 		return "redirect:/saving-config";
+	}
+	@PostMapping("/saveRoleCredit")
+	public String createRoleTC(Role role,BindingResult result,Model model) {
+		if(result.hasErrors()) {
+    		model.addAttribute("message","please reenter to data");
+    		model.addAttribute("role",role);
+    		return "createRole";
+    	}
+		if(role.getStatus().equals("hoạt động")==false && role.getStatus().equals("bị khóa")==false) {
+			model.addAttribute("message","please enter data true!!!");
+			model.addAttribute("role",role);
+			return "createRole";
+		}
+		roleService.save(role);
+		return "redirect:/credit-config";
 	}
 	@PostMapping("/roleUpdate")
 	public String roleUpdateT(@RequestParam(name="code") int code,Role role,BindingResult result, Model model,HttpSession session) {
@@ -97,15 +102,28 @@ public class ConfigController {
 			model.addAttribute("role",role);
 			return "editRole";
 		}
-		roleService.delete(role);
-		roleService.save(rol);
+		roleService.update(rol.getCode(), rol.getName(), rol.getContent(), rol.getStatus(), rol.getCode());
 		return "redirect:/saving-config";
 	}
 	@GetMapping("/deleteRole{code}")
 	public String deleteRole(@PathVariable("code") int code,Model model, HttpSession session) {
 		Role role= roleService.findByCode(code);
+		model.addAttribute("message1","Xóa thành công!!!");
 		roleService.delete(role);
-		return "redirect:/saving-config";
+		model.addAttribute("name", session.getAttribute("name"));
+		model.addAttribute("roles", roleService.findAll());
+		model.addAttribute("savingTerms", savingTermService.findAll());
+		return "configPage";
+	}
+	@GetMapping("/deleteRole1{code}")
+	public String deleteRole1(@PathVariable("code") int code,Model model, HttpSession session) {
+		Role role= roleService.findByCode(code);
+		model.addAttribute("message1","Xóa thành công!!!");
+		roleService.delete(role);
+		model.addAttribute("name", session.getAttribute("name"));
+		model.addAttribute("roles", roleService.findAll());
+		model.addAttribute("creditTerms", creditTermService.findAll());
+		return "configCreditPage";
 	}
 	
 	//CRUD SAVING
@@ -117,38 +135,43 @@ public class ConfigController {
 		return "editSavingTerm";
 	}
 	@PostMapping("/savingUpdate")
-	public String editSAvingTerm(SavingTerm savingTerm,BindingResult result, Model model,HttpSession session) {
+	public String editSAvingTerm(SavingTerm saving,BindingResult result, Model model,HttpSession session) {
 //		try {
 		if(result.hasErrors()) {
     		model.addAttribute("message","please re enter to data");
-    		model.addAttribute("saving", savingTerm);
+    		model.addAttribute("saving", saving);
     		return "editSavingTerm";
     	}
 			SavingTerm sav= new SavingTerm();
-			sav.setSavingId(savingTerm.getSavingId());
-			sav.setInterestRate(savingTerm.getInterestRate());
-			sav.setNumberOfMonth(savingTerm.getNumberOfMonth());
-			sav.setStatus(savingTerm.getStatus());
+			sav.setSavingId(saving.getSavingId());
+			sav.setInterestRate(saving.getInterestRate());
+			sav.setNumberOfMonth(saving.getNumberOfMonth());
+			sav.setStatus(saving.getStatus());
 			if(sav.getInterestRate()==0.0 || sav.getNumberOfMonth()==0 || (sav.getStatus().equals("hoạt động")==false && sav.getStatus().equals("bị khóa")==false)) {
 				model.addAttribute("message","please enter data true!!!");
-				model.addAttribute("saving", savingTerm);
+				model.addAttribute("saving", saving);
 				return "editSavingTerm";
 			}
-			
-			savingTermService.delete(savingTerm);
-			savingTermService.save(sav);
+			savingTermService.update(sav.getSavingId(),sav.getInterestRate(),sav.getNumberOfMonth(),sav.getStatus(),sav.getSavingId());
 			return "redirect:/saving-config";
-//		}
-//		catch(NumberFormatException e) {
-//			model.addAttribute("message","username/password invalid!!!");
-//			return "editSavingTerm";
-//		}
 	}
 	@GetMapping("/deleteSavingTerm{code}")
 	public String deleteSaving(@PathVariable("code") int code,Model model,HttpSession session) {
 		SavingTerm saving= savingTermService.findBySavingId(code);
-	    savingTermService.delete(saving);
-		return "redirect:/saving-config";
+		if(savingTermService.checkDeleteSavingTerm(saving)==false) {
+			model.addAttribute("message","Không thể xóa lãi xuất này vì còn tồn tại sổ tiết kiệm sử dụng!!!");
+			model.addAttribute("roles", roleService.findAll());
+			model.addAttribute("savingTerms", savingTermService.findAll());
+			return "configPage";
+		}
+		else {
+			savingTermService.delete(saving);
+			model.addAttribute("message","Xóa thành công!!!");
+			model.addAttribute("name", session.getAttribute("name"));
+			model.addAttribute("roles", roleService.findAll());
+			model.addAttribute("savingTerms", savingTermService.findAll());
+			return "configPage";
+		}
 	}
 	@GetMapping("/createSavingTerm")
 	public String createSavingT(Model model) {
@@ -203,18 +226,27 @@ public class ConfigController {
 			model.addAttribute("creditTerm", creditTerm);
 			return "editCreditTerm";
 		}
-		creditTermService.deleleById(creditTerm.getCreditId());
-		creditTermService.delete(creditTerm);
-		
-		creditTermService.save(creditTerm);
+		creditTermService.update(cre.getCreditId(), cre.getInterestRate(), cre.getNumberOfMonth(), cre.getStatus(), cre.getCreditId());
 		
 		return "redirect:/credit-config";
 	}
 	@GetMapping("/deleteCreditTerm{code}")
 	public String deleteCredit(@PathVariable("code") int code,Model model,HttpSession session) {
 		CreditTerm saving= creditTermService.findByCreditId(code);
-	    creditTermService.delete(saving);
-		return "redirect:/credit-config";
+		if(creditTermService.checkDeleteCreditTerm(saving)==false) {
+			model.addAttribute("message","Không thể xóa lãi xuất này vì còn tồn tại sổ vay sử dụng!!!");
+			model.addAttribute("roles", roleService.findAll());
+			model.addAttribute("creditTerms", creditTermService.findAll());
+			return "configCreditPage";
+		}
+		else {
+			creditTermService.delete(saving);
+			model.addAttribute("message","Xóa thành công!!!");
+			model.addAttribute("name", session.getAttribute("name"));
+			model.addAttribute("roles", roleService.findAll());
+			model.addAttribute("creditTerms", creditTermService.findAll());
+			return "configCreditPage";
+		}
 	}
 	@GetMapping("/createCreditTerm")
 	public String createCreditT(Model model) {
@@ -236,38 +268,4 @@ public class ConfigController {
 		creditTermService .save(creditTerm);
 		return "redirect:/credit-config";
 	}
-        
-        
-        
-        @GetMapping("/SavingBooks")
-        public String SavingBooks(Saving Saving,Model model) {
-            model.addAttribute("savingbooks", SavingService.findAll());
-            return "savingBooks";
-        }
-        @GetMapping("/Credits")
-        public String Credits(Credit Credit,Model model) {
-            List<Credit> c = creditService.findAll();
-            for(Credit credit : c) {
-                String dateString = credit.getPayDay();
-                LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                LocalDate currentDate = LocalDate.now();
-                if (date.compareTo(currentDate) <= 0) {
-                    credit.setStatus(1);
-                } else credit.setStatus(0);
-            }
-            creditService.saveAll(c);
-            model.addAttribute("credits", c);
-            return "Credits";
-        }
-        
-        @GetMapping("/ProfitReport")
-        public String CreditReport(Credit Credit,Model model) {
-            List<Credit> c = creditService.findAll();
-            for(Credit obj : c) {
-                obj.setFormattedMoney(new DecimalFormat("#,###.00").format(obj.getMoney()));
-            }
-            creditService.saveAll(c);
-            model.addAttribute("credits", c);
-            return "ProfitReport";
-        }   
 }

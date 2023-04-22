@@ -1,9 +1,11 @@
 package com.example.sqaProject.service;
 
-import com.example.sqaProject.entity.Saving;
 import java.util.List;
+
+import com.example.sqaProject.entity.Saving;
 
 public interface ISavingService {
 	List<Saving> findAll();
-        void saveAll(List<Saving> c);
+	List<Saving> getBillByDate(String day1, String day2);
+	List<Saving> findAllByDate(String date);
 }

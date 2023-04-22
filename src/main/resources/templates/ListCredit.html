@@ -126,7 +126,7 @@
 			</div>
 			<ul class="nav nav-list">
 				<li>
-					<a href="#" class="dropdown-toggle">
+					<a class="dropdown-toggle">
 						<i class="menu-icon fa fa-list"></i>
 						<span class="menu-text"></span>
 						Quản lý sổ tiết kiệm
@@ -135,11 +135,36 @@
 					<b class="arrow"></b>
 					<ul class="submenu">
 						<li>
-							<a href="/SavingBooks">
+							<a href="/listSaving">
 								<i class="menu-icon fa fa-caret-right"></i>
 								Danh sách sổ tiết kiệm
 							</a>
 							<b class="arrow"></b>
+						</li>
+						<li>
+							<a  class="dropdown-toggle">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Báo cáo
+							</a>
+							<b class="arrow"></b>
+							<ul class="submenu nav-show" style="display: block;">
+									<li class="">
+										<a href="/report-profit">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Báo cáo doanh thu
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/report-book">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Báo cáo sổ tiết kiệm
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+								</ul>
 						</li>
 						<li>
 							<a href="/saving-config">
@@ -151,7 +176,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#" class="dropdown-toggle">
+					<a class="dropdown-toggle">
 						<i class="menu-icon fa fa-list"></i>
 						<span class="menu-text"></span>
 						Quản lý sổ vay
@@ -160,11 +185,28 @@
 					<b class="arrow"></b>
 					<ul class="submenu">
 						<li>
-							<a href="/Credits">
+							<a href="/listCredit">
 								<i class="menu-icon fa fa-caret-right"></i>
 								Danh sách sổ vay
 							</a>
 							<b class="arrow"></b>
+						</li>
+						<li>
+							<a  class="dropdown-toggle">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Báo cáo
+							</a>
+							<b class="arrow"></b>
+							<ul class="submenu nav-show" style="display: block;">
+									<li class="">
+										<a href="/report-borrow">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Báo cáo số khoản vay
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+								</ul>
 						</li>
 						<li>
 							<a href="/credit-config">
@@ -174,11 +216,6 @@
 							<b class="arrow"></b>
 						</li>
 					</ul>
-				</li>
-                                <li>
-				    <a href="/ProfitReport">
-				        Báo cáo doanh thu
-				    </a>
 				</li>
 			</ul>
 			<div class="sidebar-toggle sidebar-collapse">
@@ -204,7 +241,18 @@
 						<div class="col-xs-12">
 							
 							<div class="widget-box table-filter">
-								<h3 style="color: black; text-align: center;">lợi nhuận tháng sau</h3>
+								<h3 style="color: black; text-align: center;">Danh sách sổ vay</h3>
+								<div class="table-btn-controls">
+									<div class="pull-right tableTools-container">
+										<div class="dt-buttons btn-overlap btn-group">
+										
+											<a flag="info" class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip" title="Thêm bài viết" href="/createRole"> <span>
+													<i class="fa fa-plus-circle bigger-110 purple"></i>
+											</span>
+											</a>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="row">
 								<div class="col-xs-12">
@@ -212,39 +260,28 @@
 										<table class="table table-bordered">
 											<thead>
 												<tr>
-													<th>Số tài khoản</th>
-                                                                                                        <th>Số tiền gốc</th>
-													<th>Số tiền hiện tại</th>
-                                                                                                        <th>Số tiền cộng vào tài khoản</th>
-                                                                                                        <th>Lãi suất</th>
-													<th>Hình thức</th>
+													<th><input type="checkbox" id="checkAll"></th>
+													<th>Mã sổ</th>
+													<th>Tên người vay</th>
+													<th>Số tiền vay</th>
+													<th>ngày vay</th>
+													<th>ngày trả(dự kiến)</th>
+													<th>thế chấp</th>
+													<th>Kỳ hạn</th>
+													<th>Lãi suất</th>
 												</tr>
 											</thead>
-											<tbody>
-												
-													<tr th:each="sb: ${savingbooks}">
-														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{sb.bankAccount.bankAccountNumber}"></th>
-														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{sb.originalMoney+' VND'}"></th>
-                                                                                                                <th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;">
-                                                                                                                    <div th:if="#{c.getStatus()==0}">
-                                                                                                                        <div th:text="*{sb.originalMoney} * (1 + *{sb.sTerm.interestRate}) + ' VND'"></div>
-                                                                                                                    </div>
-
-                                                                                                                    <div th:unless="#{c.getStatus()==0}">
-                                                                                                                        <div th:text="*{sb.originalMoney+ ' VND'}"></div>
-                                                                                                                    </div>
-                                                                                                                </th>
-                                                                                                                <th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;">
-                                                                                                                    <div th:if="#{c.getStatus()==0}">
-                                                                                                                        <div>0</div>
-                                                                                                                    </div>
-
-                                                                                                                    <div th:unless="#{c.getStatus()==0}">
-                                                                                                                        <div th:text="*{sb.originalMoney} * *{sb.sTerm.interestRate} +' VND'}"></div>
-                                                                                                                    </div>
-                                                                                                                </th>
-                                                                                                                <th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{sb.sTerm.interestRate}"></th>
-														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{sb.kindOfProfit}"></th>
+											<tbody>					
+													<tr th:each="r: ${list}">
+														<td><input type="checkbox" id="checkbox_1" value="1"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.bankAccountNumber}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.fullname}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.money}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.borrowDay}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.payDay}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.mortgage}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.cTerm.numberOfMonth}+' tháng'"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.cTerm.interestRate}+' (%/năm)'"></td>
 													</tr>
 											</tbody>
 										</table>

@@ -239,7 +239,69 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-
+							
+							<div class="widget-box table-filter">
+								<h3 style="color: black; text-align: center;">Danh sách sổ tiết kiệm</h3>
+								<div class="table-btn-controls">
+									<div class="pull-right tableTools-container">
+										<div class="dt-buttons btn-overlap btn-group">
+										
+											<a flag="info" class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip" title="Thêm bài viết" href="/createRole"> <span>
+													<i class="fa fa-plus-circle bigger-110 purple"></i>
+											</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="table-responsive">
+                                                                            <div>
+                                                                                <label for="month-select">Select month:</label>
+                                                                                <select id="month-select">
+                                                                                    <option value="0">-- Select a month --</option>
+                                                                                    <option value="1">January</option>
+                                                                                    <option value="2">February</option>
+                                                                                    <option value="3">March</option>
+                                                                                    <option value="4">April</option>
+                                                                                    <option value="5">May</option>
+                                                                                    <option value="6">June</option>
+                                                                                    <option value="7">July</option>
+                                                                                    <option value="8">August</option>
+                                                                                    <option value="9">September</option>
+                                                                                    <option value="10">October</option>
+                                                                                    <option value="11">November</option>
+                                                                                    <option value="12">December</option>
+                                                                                </select>
+                                                                                <input style="padding: 3.5px" type="number" id="year-select" value="2023" min="2000" max="2023"/>
+                                                                                <button onclick="filterTable()">Filter</button>
+                                                                            </div>
+                                                                                <table class="table table-bordered" id="table">
+											<thead>
+												<tr>
+													<th>Mã sổ</th>
+													<th>Tên người vay</th>
+													<th>Số tiền vay</th>
+													<th>ngày vay</th>
+													<th>Lãi suất (%/năm)</th>
+												</tr>
+											</thead>
+											<tbody>					
+													<tr th:each="r: ${credits}">
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.bankAccountNumber}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.fullname}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.money}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.borrowDay}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.cTerm.interestRate}"></td>
+													</tr>
+											</tbody>
+										</table>
+                                                                            <label style="color: #707070; font-family: 'Open Sans'; font-size: 13px;">Tổng tiền lãi nhận về / năm (tiền gốc x lãi): </label>
+                                                                            <span id="profit"></span>VNĐ
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -277,6 +339,41 @@
 			<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 		</a>
 	</div>
+        <script>
+            // JavaScript code
+            function filterTable() {
+                const monthSelect = document.getElementById("month-select");
+                const selectedMonth = parseInt(monthSelect.value);
+                const yearSelect = document.getElementById("year-select");
+                const selectedYear = parseInt(yearSelect.value);
+        
+                const salesTableBody = document.querySelector("#table tbody");
+                for (let i = 0; i < salesTableBody.rows.length; i++) {
+                    const row = salesTableBody.rows[i];
+
+                    const date = row.cells[3].textContent;
+                    const month = parseInt(date.split("-")[1]);
+                    const year = parseInt(date.split("-")[0]);
+            
+                    if (selectedMonth === 0) {
+                        row.style.display = "";
+                    } else {
+                        if(month === selectedMonth && year === selectedYear) row.style.display = "";
+                        else row.style.display = "none";
+                    }
+                }
+            }
+  
+            let profit = 0;
+            const salesTableBody = document.querySelector("#table tbody");
+            for (let i = 0; i < salesTableBody.rows.length; i++) {
+                const row = salesTableBody.rows[i];
+                let money = parseFloat(row.cells[2].textContent);
+                let rate = parseFloat(row.cells[4].textContent);
+                profit = profit + money*rate/100;
+            }
+            document.getElementById("profit").innerHTML = profit;
+        </script>
 
 	<script src="paging/jquery.twbsPagination.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>

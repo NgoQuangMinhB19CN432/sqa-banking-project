@@ -126,7 +126,7 @@
 			</div>
 			<ul class="nav nav-list">
 				<li>
-					<a href="#" class="dropdown-toggle">
+					<a class="dropdown-toggle">
 						<i class="menu-icon fa fa-list"></i>
 						<span class="menu-text"></span>
 						Quản lý sổ tiết kiệm
@@ -135,11 +135,36 @@
 					<b class="arrow"></b>
 					<ul class="submenu">
 						<li>
-							<a href="/SavingBooks">
+							<a href="/listSaving">
 								<i class="menu-icon fa fa-caret-right"></i>
 								Danh sách sổ tiết kiệm
 							</a>
 							<b class="arrow"></b>
+						</li>
+						<li>
+							<a  class="dropdown-toggle">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Báo cáo
+							</a>
+							<b class="arrow"></b>
+							<ul class="submenu nav-show" style="display: block;">
+									<li class="">
+										<a href="/report-profit">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Báo cáo doanh thu
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/report-book">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Báo cáo sổ tiết kiệm
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+								</ul>
 						</li>
 						<li>
 							<a href="/saving-config">
@@ -151,7 +176,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#" class="dropdown-toggle">
+					<a class="dropdown-toggle">
 						<i class="menu-icon fa fa-list"></i>
 						<span class="menu-text"></span>
 						Quản lý sổ vay
@@ -160,11 +185,28 @@
 					<b class="arrow"></b>
 					<ul class="submenu">
 						<li>
-							<a href="/Credits">
+							<a href="/listCredit">
 								<i class="menu-icon fa fa-caret-right"></i>
 								Danh sách sổ vay
 							</a>
 							<b class="arrow"></b>
+						</li>
+						<li>
+							<a  class="dropdown-toggle">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Báo cáo
+							</a>
+							<b class="arrow"></b>
+							<ul class="submenu nav-show" style="display: block;">
+									<li class="">
+										<a href="/report-borrow">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Báo cáo số khoản vay
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+								</ul>
 						</li>
 						<li>
 							<a href="/credit-config">
@@ -174,11 +216,6 @@
 							<b class="arrow"></b>
 						</li>
 					</ul>
-				</li>
-                                <li>
-				    <a href="/ProfitReport">
-				        Báo cáo doanh thu
-				    </a>
 				</li>
 			</ul>
 			<div class="sidebar-toggle sidebar-collapse">
@@ -210,16 +247,18 @@
 									<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Tên quy
 										định:</label>
 									<div class="col-sm-9">
-										<input class="col-xs-10 col-sm-5" type="text" th:field="*{content}">
+										<input class="col-xs-10 col-sm-5" type="text" th:field="*{name}">
 									</div>
 								</div>
+								<br>
 								<div class="form-group" style="margin-top: 30px;">
 									<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Nội
 										dung:</label>
 									<div class="col-sm-9">
-										<input class="col-xs-10 col-sm-5" type="text" th:field="*{name}">
+										<input class="col-xs-10 col-sm-5" type="text" th:field="*{content}">
 									</div>
 								</div>
+								<br>
 								<div class="form-group" style="margin-top: 30px;">
 									<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Trạng
 										thái:</label>
@@ -227,6 +266,7 @@
 										<input class="col-xs-10 col-sm-5" type="text" th:field="*{status}">
 									</div>
 								</div>
+								<br><br>
 								<div class="clearfix form-actions" style="margin-top: 30px;">
 									<div class="col-md-offset-3 col-md-9">
 										<input class="btn btn-info" type="submit" id="btnAddOrUpdateNew">

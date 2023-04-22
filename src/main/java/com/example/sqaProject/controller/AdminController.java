@@ -1,11 +1,11 @@
 package com.example.sqaProject.controller;
 
+import com.example.sqaProject.entity.Admin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.sqaProject.entity.Admin;
 
 import jakarta.servlet.http.HttpSession;
 

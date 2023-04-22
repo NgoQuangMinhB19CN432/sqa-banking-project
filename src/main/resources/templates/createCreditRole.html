@@ -126,7 +126,7 @@
 			</div>
 			<ul class="nav nav-list">
 				<li>
-					<a href="#" class="dropdown-toggle">
+					<a class="dropdown-toggle">
 						<i class="menu-icon fa fa-list"></i>
 						<span class="menu-text"></span>
 						Quản lý sổ tiết kiệm
@@ -135,11 +135,36 @@
 					<b class="arrow"></b>
 					<ul class="submenu">
 						<li>
-							<a href="/SavingBooks">
+							<a href="/listSaving">
 								<i class="menu-icon fa fa-caret-right"></i>
 								Danh sách sổ tiết kiệm
 							</a>
 							<b class="arrow"></b>
+						</li>
+						<li>
+							<a  class="dropdown-toggle">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Báo cáo
+							</a>
+							<b class="arrow"></b>
+							<ul class="submenu nav-show" style="display: block;">
+									<li class="">
+										<a href="/report-profit">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Báo cáo doanh thu
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+									<li class="">
+										<a href="/report-book">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Báo cáo sổ tiết kiệm
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+								</ul>
 						</li>
 						<li>
 							<a href="/saving-config">
@@ -151,7 +176,7 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#" class="dropdown-toggle">
+					<a class="dropdown-toggle">
 						<i class="menu-icon fa fa-list"></i>
 						<span class="menu-text"></span>
 						Quản lý sổ vay
@@ -160,11 +185,28 @@
 					<b class="arrow"></b>
 					<ul class="submenu">
 						<li>
-							<a href="/Credits">
+							<a href="/listCredit">
 								<i class="menu-icon fa fa-caret-right"></i>
 								Danh sách sổ vay
 							</a>
 							<b class="arrow"></b>
+						</li>
+						<li>
+							<a  class="dropdown-toggle">
+								<i class="menu-icon fa fa-caret-right"></i>
+								Báo cáo
+							</a>
+							<b class="arrow"></b>
+							<ul class="submenu nav-show" style="display: block;">
+									<li class="">
+										<a href="/report-borrow">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Báo cáo số khoản vay
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+								</ul>
 						</li>
 						<li>
 							<a href="/credit-config">
@@ -174,11 +216,6 @@
 							<b class="arrow"></b>
 						</li>
 					</ul>
-				</li>
-                                <li>
-				    <a href="/ProfitReport">
-				        Báo cáo doanh thu
-				    </a>
 				</li>
 			</ul>
 			<div class="sidebar-toggle sidebar-collapse">
@@ -202,47 +239,45 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							
-							<div class="widget-box table-filter">
-								<h3 style="color: black; text-align: center;">Danh sách các khoản vay</h3>
-							</div>
-							<div class="row">
-								<div class="col-xs-12">
-									<div class="table-responsive">
-										<table class="table table-bordered">
-											<thead>
-												<tr>
-													<th>Số tài khoản</th>
-													<th>Ngày thực hiện giao dịch vay</th>
-													<th>Số tiền vay</th>
-                                                                                                        <th>Mã số kì hạn vay</th>
-                                                                                                        <th>Thế chấp</th>
-<!--                                                                                                        <th>Tình trạng</th>-->
-												</tr>
-											</thead>
-											<tbody>
-												
-													<tr th:each="c: ${credits}">
-														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{c.bankAccount.bankAccountNumber}"></th>
-														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{c.borrowDay}"></th>
-														<th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{c.money+' VND'}"></th>
-                                                                                                                <th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{c.cTerm.creditId}"></th>
-                                                                                                                <th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;" th:text="*{c.mortgage}"></th>
-                                                                                                                <th style="color: #707070; font-family: 'Open Sans'; font-size: 13px;">
-                                                                                                                    <div th:if="${c.status}">
-                                                                                                                        <div>Còn hạn</div>
-                                                                                                                    </div>
-
-                                                                                                                    <div th:unless="${c.status}">
-                                                                                                                        <div>Quá hạn</div>
-                                                                                                                    </div>
-                                                                                                                </th>
-													</tr>
-											</tbody>
-										</table>
+							<form th:action="@{/saveRoleCredit}" th:object="${role}" method="post" style="margin-top: 30px;">
+								<i th:utext="${message}" style="color:red"></i>
+								<input class="col-xs-10 col-sm-5" type="hidden" th:field="*{code}">
+								<input class="col-xs-10 col-sm-5" type="hidden" name="code" value="*{code}">
+								<div class="form-group" style="margin-top: 30px;">
+									<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Tên quy
+										định:</label>
+									<div class="col-sm-9">
+										<input class="col-xs-10 col-sm-5" type="text" th:field="*{name}">
 									</div>
 								</div>
-							</div>
+								<br>
+								<div class="form-group" style="margin-top: 30px;">
+									<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Nội
+										dung:</label>
+									<div class="col-sm-9">
+										<input class="col-xs-10 col-sm-5" type="text" th:field="*{content}">
+									</div>
+								</div>
+								<br>
+								<div class="form-group" style="margin-top: 30px;">
+									<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Trạng
+										thái:</label>
+									<div class="col-sm-9">
+										<input class="col-xs-10 col-sm-5" type="text" th:field="*{status}">
+									</div>
+								</div>
+								<br>
+								<div class="clearfix form-actions" style="margin-top: 30px;">
+									<div class="col-md-offset-3 col-md-9">
+										<input class="btn btn-info" type="submit" id="btnAddOrUpdateNew">
+										</input>
+										<button class="btn" type="reset">
+											<a href="/saving-config">Back</a>
+										</button>
+									</div>
+								</div>
+								<br><br>
+							</form>
 						</div>
 					</div>
 				</div>
