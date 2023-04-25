@@ -17,7 +17,7 @@ import com.example.sqaProject.service.impl.SavingService;
 
 @Controller
 public class ReportController {
-	@Autowired
+    	@Autowired
 	private SavingService savingService;
 	
 	@Autowired
@@ -26,26 +26,33 @@ public class ReportController {
 	@GetMapping("/report-book")
 	public String reportPage(Model model) {
 		Date datee = new Date();
-		String ngay = new SimpleDateFormat("yyyy/MM/dd").format(datee.getTime());
-		String ngay1 = new SimpleDateFormat("yyyy/MM/dd").format(datee.getTime() - 7 * 24 * 60 * 60 * 1000);
-		String ngay2 = new SimpleDateFormat("yyyy/MM/dd").format(datee.getTime() - 30 * 24 * 60 * 60 * 1000);
-		List<Saving> list = savingService.findAllByDate(ngay);
-		List<Saving> list1 = savingService.getBillByDate(ngay1, ngay);
-		List<Saving> list2 = savingService.getBillByDate(ngay2, ngay);
+		String ngay = new SimpleDateFormat("yyyy-MM-dd").format(datee.getTime());
+                List<Saving> lAll = savingService.findAll();
+                List<Saving> lMonth = new ArrayList<>();
+                for(Saving sv: lAll) {
+                    if(sv.getToDate().substring(0, sv.getToDate().length()-3).equalsIgnoreCase(ngay.substring(0,ngay.length()-3))) {
+                        lMonth.add(sv);
+                    }
+                }
+		List<Saving> list = savingService.findByToDate(ngay);
 		model.addAttribute("list1", list);
-		model.addAttribute("list2", list2);
+		model.addAttribute("list2", lMonth);
 		return "reportPage";
 	}
 	@GetMapping("/report-borrow")
 	public String reportBorrowPage(Model model) {
 		Date datee = new Date();
-		String ngay = new SimpleDateFormat("yyyy/MM/dd").format(datee.getTime());
-//		String ngay1 = new SimpleDateFormat("yyyy/MM/dd").format(datee.getTime() - 7 * 24 * 60 * 60 * 1000);
-//		String ngay2 = new SimpleDateFormat("yyyy/MM/dd").format(datee.getTime() - 30 * 24 * 60 * 60 * 1000);
+		String ngay = new SimpleDateFormat("yyyy-MM-dd").format(datee.getTime());
+		List<Credit> lAll = creditService.findAll();
+                List<Credit> lMonth = new ArrayList<>();
+                for(Credit sv: lAll) {
+                    if(sv.getBorrowDay().substring(0, sv.getBorrowDay().length()-3).equalsIgnoreCase(ngay.substring(0,ngay.length()-3))) {
+                        lMonth.add(sv);
+                    }
+                }
 		List<Credit> list = creditService.findByBorrowDay(ngay);
-		List<Credit> list2 = new ArrayList<>();
 		model.addAttribute("list1", list);
-		model.addAttribute("list2", list2);
+		model.addAttribute("list2", lMonth);
 		return "reportBorrowPage";
 	}
 	@GetMapping("/listSaving")
