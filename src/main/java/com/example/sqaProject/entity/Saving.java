@@ -18,17 +18,20 @@ import lombok.Setter;
 @Table(name = "saving")
 public class Saving {
     @Id
+    @Column(name="saving_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int savingId;
     
-    @Column(name="toDate")
+    @Column(name="to_date")
     private String toDate;
     
-    @Column(name="originalMoney")
-    private float originalMoney;
+    @Column(name="original_money")
+    private int originalMoney;
     
+    @Column(name="result_money")
+    private int resultMoney;
     
-    @Column(name="kindOfProfit")
+    @Column(name="kind_of_profit")
     private String kindOfProfit;
     
     @ManyToOne 
@@ -38,4 +41,7 @@ public class Saving {
     @ManyToOne 
     @JoinColumn(name = "saving_term_id")
     private SavingTerm sTerm;
+    
+    @Column(name="saving_status")
+    private boolean status;
 }
