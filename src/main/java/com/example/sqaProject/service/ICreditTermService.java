@@ -11,5 +11,5 @@ public interface ICreditTermService {
 	void delete(CreditTerm creditTerm);
 	void deleleByCreditId(int id);
 	boolean checkDeleteCreditTerm(CreditTerm sv);
-	int update(int creaditId,float interest,int numberOfMonth,String status,int sv2);
+	int update(int creaditId,float interest,int numberOfMonth,String status,String mBy,String mDate,int sv2);
 }
