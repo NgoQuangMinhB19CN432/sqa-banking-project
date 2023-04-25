@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.sqaProject.entity.Credit;
 import com.example.sqaProject.repository.CreditRepository;
 import com.example.sqaProject.service.ICreditService;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @Service
 public class CreditService implements ICreditService {
@@ -23,5 +24,24 @@ public class CreditService implements ICreditService {
 		// TODO Auto-generated method stub
 		return creditRepository.findByBorrowDay(date);
 	}
-
+        @Override
+        @Scheduled(cron = "0 0 0 1 * *")
+        public void autoUpdateMoney() {
+            List<Credit> credits = creditRepository.findAll();
+            for (Credit credit : credits) {
+                if(credit.isStatus()) {
+                    credit.setMoney((int) (credit.getMoney() * (credit.getCTerm().getInterestRate()/(100*12))));
+                }
+            }
+        }
+        @Override
+        @Scheduled(cron = "0 0 12 * * *")
+        public void autoUpdateMoneyByStatus() {
+            List<Credit> credits = creditRepository.findAll();
+            for (Credit credit : credits) {
+                if(!credit.isStatus()) {
+                    credit.setMoney(0);
+                }
+            }
+        }
 }
