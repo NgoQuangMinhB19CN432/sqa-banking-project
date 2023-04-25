@@ -63,8 +63,8 @@ public class CreditTermService implements ICreditTermService{
 				return true;
 	}
 	@Override
-	public int update(int creaditId, float interest, int numberOfMonth, String status, int sv2) {
-		return jdbc.update("update credit_term set credit_term_id=?, interest_rate=? , number_of_month=?, status=? where credit_term_id=?", creaditId,interest,numberOfMonth,status,creaditId);
+	public int update(int creaditId, float interest, int numberOfMonth, String status,String mBy,String mDate, int sv2) {
+		return jdbc.update("update credit_term set credit_term_id=?, interest_rate=? , number_of_month=?, status=?, modifiedby=?,modifieddate=? where credit_term_id=?", creaditId,interest,numberOfMonth,status,mBy,mDate, creaditId);
 	}
 
 }
