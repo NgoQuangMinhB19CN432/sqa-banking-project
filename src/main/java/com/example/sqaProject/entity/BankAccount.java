@@ -15,11 +15,12 @@ import lombok.Setter;
 @Setter
 @Table(name = "bank_account")
 public class BankAccount {
-	@Id
-	@Column(name="id")
-    private int id;
+    @Id
+    @Column(name="bank_account_number")
+    private String bankAccountNumber;
+    
     @Column(name="money")
-    private float money;
+    private int money;
     
     @Column(name="credit_score")
     private float creditScore;
@@ -36,8 +37,6 @@ public class BankAccount {
     private String username;
     @Column(name="password")
     private String password;
-    @Column(name="bank_account_number")
-    private String bankAccountNumber;
     
     @OneToMany(mappedBy = "bankAccountNumber")
     List <Credit> credits;
