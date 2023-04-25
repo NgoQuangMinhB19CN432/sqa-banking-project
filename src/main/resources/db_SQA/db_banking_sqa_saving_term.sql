@@ -23,12 +23,16 @@ DROP TABLE IF EXISTS `saving_term`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `saving_term` (
-  `saving_term_id` int NOT NULL AUTO_INCREMENT,
-  `interest_rate` float DEFAULT NULL,
-  `number_of_month` int DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `saving_term_id` int NOT NULL,
+  `interest_rate` float NOT NULL,
+  `number_of_month` int NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `createdby` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `createddate` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `modifiedby` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `modifieddate` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`saving_term_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +41,7 @@ CREATE TABLE `saving_term` (
 
 LOCK TABLES `saving_term` WRITE;
 /*!40000 ALTER TABLE `saving_term` DISABLE KEYS */;
-INSERT INTO `saving_term` VALUES (10,7.8,13,'hoạt động'),(11,7.8,10,'hoạt động'),(12,3.6,3,'hoạt động'),(13,23,3,'hoạt động'),(19,23,3,'bị khóa'),(24,23,3,'hoạt động');
+INSERT INTO `saving_term` VALUES (10,7.8,13,'hoạt động',NULL,NULL,NULL,NULL),(11,7.8,10,'hoạt động',NULL,NULL,NULL,NULL),(12,3.6,3,'hoạt động',NULL,NULL,NULL,NULL),(13,23,3,'hoạt động',NULL,NULL,NULL,NULL),(24,23,6,'bị khóa',NULL,NULL,'nmanh3007','24-4-2023 10:24:15');
 /*!40000 ALTER TABLE `saving_term` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-21 17:47:57
+-- Dump completed on 2023-04-24 18:02:57

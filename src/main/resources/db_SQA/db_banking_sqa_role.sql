@@ -24,11 +24,15 @@ DROP TABLE IF EXISTS `role`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
   `code` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `content` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `role_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `createdby` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `createddate` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `modifiedby` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `modifieddate` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +41,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'Quy định 1','Nhân viên không được tự ý thêm sửa xóa nội quy khi chưa được sự cho phép của ban giám đốc','hoạt động'),(32,'Quy định 2','Không thay đổi lãi suất khi có sổ tiết kiệm(sổ vay lãi) còn được áp dụng','hoạt động');
+INSERT INTO `role` VALUES (1,'Quy định 1','Nhân viên không được tự ý thêm sửa xóa nội quy khi chưa được sự cho phép của ban giám đốc','hoạt động',NULL,NULL,NULL,NULL),(2,'Quy định 2','Không thay đổi lãi suất khi có sổ tiết kiệm(sổ vay lãi) còn được áp dụng','hoạt động',NULL,NULL,'admin','24-4-2023 10:35:10');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-21 17:47:57
+-- Dump completed on 2023-04-24 18:02:58

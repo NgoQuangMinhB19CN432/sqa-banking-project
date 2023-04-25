@@ -25,16 +25,18 @@ DROP TABLE IF EXISTS `credit`;
 CREATE TABLE `credit` (
   `credit_id` int NOT NULL AUTO_INCREMENT,
   `borrow_day` date DEFAULT NULL,
-  `money` float DEFAULT NULL,
-  `mortgage` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `original_money` int DEFAULT NULL,
+  `money` int DEFAULT '0',
+  `mortgage` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `pay_day` date DEFAULT NULL,
-  `bank_account_number` int DEFAULT NULL,
-  `credit_term_id` int DEFAULT NULL,
+  `bank_account_number` varchar(255) COLLATE utf8_bin NOT NULL,
+  `credit_term_id` int NOT NULL,
+  `credit_status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`credit_id`),
   KEY `bank_account_number` (`bank_account_number`),
-  KEY `creditTerm_id` (`credit_term_id`),
-  CONSTRAINT `bank_account_number` FOREIGN KEY (`bank_account_number`) REFERENCES `bank_account` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `creditTerm_id` FOREIGN KEY (`credit_term_id`) REFERENCES `credit_term` (`credit_term_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  KEY `credit_term_id` (`credit_term_id`),
+  CONSTRAINT `credit_bank_account_number_fk` FOREIGN KEY (`bank_account_number`) REFERENCES `bank_account` (`bank_account_number`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `credit_credit_term_id_fk` FOREIGN KEY (`credit_term_id`) REFERENCES `credit_term` (`credit_term_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -44,7 +46,7 @@ CREATE TABLE `credit` (
 
 LOCK TABLES `credit` WRITE;
 /*!40000 ALTER TABLE `credit` DISABLE KEYS */;
-INSERT INTO `credit` VALUES (1,'2023-04-03',50000000,'nhà riêng','2023-12-03',1,1);
+INSERT INTO `credit` VALUES (1,'2023-04-03',50000000,0,'nhà riêng','2023-12-03','268000203213',1,1);
 /*!40000 ALTER TABLE `credit` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-21 17:47:57
+-- Dump completed on 2023-04-24 18:02:58

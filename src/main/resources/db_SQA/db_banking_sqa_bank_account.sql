@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `bank_account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bank_account` (
-  `id` int NOT NULL,
-  `address` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `bank_account_number` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `age` int DEFAULT NULL,
   `credit_score` float DEFAULT NULL,
-  `fullname` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `money` float DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_bin NOT NULL,
-  `phonenumber` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `username` varchar(255) COLLATE utf8_bin NOT NULL,
-  `bank_account_number` varchar(255) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+  `fullname` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `money` int DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `phonenumber` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `account_status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`bank_account_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -43,7 +43,7 @@ CREATE TABLE `bank_account` (
 
 LOCK TABLES `bank_account` WRITE;
 /*!40000 ALTER TABLE `bank_account` DISABLE KEYS */;
-INSERT INTO `bank_account` VALUES (1,'Vinh',22,5,'Trần Nguyễn Mạnh',50000000,'123456','098234232','nmanh3007','268000203212');
+INSERT INTO `bank_account` VALUES ('268000203213','Vinh',22,5,'Trần Nguyễn Mạnh',50000000,'123456','098234232','nmanh3007',1);
 /*!40000 ALTER TABLE `bank_account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-21 17:47:57
+-- Dump completed on 2023-04-24 18:02:58

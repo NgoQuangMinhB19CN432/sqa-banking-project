@@ -16,33 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `credit_term`
+-- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `credit_term`;
+DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `credit_term` (
-  `credit_term_id` int NOT NULL,
-  `interest_rate` float NOT NULL,
-  `number_of_month` int NOT NULL,
-  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `createdby` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `createddate` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `modifiedby` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `modifieddate` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`credit_term_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+CREATE TABLE `admin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `credit_term`
+-- Dumping data for table `admin`
 --
 
-LOCK TABLES `credit_term` WRITE;
-/*!40000 ALTER TABLE `credit_term` DISABLE KEYS */;
-INSERT INTO `credit_term` VALUES (1,8.4,12,'hoạt động',NULL,NULL,NULL,NULL),(2,8.4,9,'hoạt động',NULL,NULL,NULL,NULL),(3,10.2,36,'bị khóa',NULL,NULL,NULL,NULL),(4,9.6,24,'bị khóa',NULL,NULL,'nmanh3007','24-4-2023 10:25:54');
-/*!40000 ALTER TABLE `credit_term` ENABLE KEYS */;
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1,'nmanh3007','123','Trần Nguyễn Mạnh','nguyenmanh.2014.1102@gmail.com','0948847875','Vinh-Nghệ An'),(2,'admin','123456','Nguyễn Văn A','nguyenvana@gmail.com','0213325433','HaDong-Ha Noi');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
