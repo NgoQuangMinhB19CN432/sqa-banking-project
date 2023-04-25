@@ -263,7 +263,8 @@
 													<th><input type="checkbox" id="checkAll"></th>
 													<th>Mã sổ</th>
 													<th>Tên người vay</th>
-													<th>Số tiền vay</th>
+													<th>Số tiền vay gốc</th>
+                                                                                                        <th>Số tiền lãi phải trả</th>
 													<th>ngày vay</th>
 													<th>ngày trả(dự kiến)</th>
 													<th>thế chấp</th>
@@ -276,7 +277,8 @@
 														<td><input type="checkbox" id="checkbox_1" value="1"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.bankAccountNumber}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.fullname}"></td>
-														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.money}"></td>
+                                                                                                                <td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:utext="${@utilityAppication.formattedMoney(r.original_money)}"></td>
+                                                                                                                <td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:utext="${@utilityAppication.formattedMoney(r.money)}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.borrowDay}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.payDay}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.mortgage}"></td>
@@ -317,7 +319,8 @@
 													<th><input type="checkbox" id="checkAll"></th>
 													<th>Mã sổ</th>
 													<th>Tên người vay</th>
-													<th>Số tiền vay</th>
+													<th>Số tiền vay gốc</th>
+                                                                                                        <th>Số tiền lãi phải trả</th>
 													<th>ngày vay</th>
 													<th>ngày trả(dự kiến)</th>
 													<th>thế chấp</th>
@@ -330,9 +333,11 @@
 														<td><input type="checkbox" id="checkbox_1" value="1"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.bankAccountNumber}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.fullname}"></td>
-														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.money}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:utext="${@utilityAppication.formattedMoney(r.original_money)}"></td>
+                                                                                                                <td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:utext="${@utilityAppication.formattedMoney(r.money)}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.borrowDay}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.payDay}"></td>
+                                                                                                                <td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.mortgage}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.cTerm.numberOfMonth}+' tháng'"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.cTerm.interestRate}+' (%/năm)'"></td>
 													</tr>

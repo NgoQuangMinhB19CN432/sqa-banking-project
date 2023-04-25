@@ -265,6 +265,7 @@
 													<th>Tên người gửi</th>
 													<th>Kiểu lợi nhuận</th>
 													<th>Số tiền gửi</th>
+                                                                                                        <th>Lợi nhuận</th>
 													<th>Gửi từ ngày</th>
 													<th>Kỳ hạn</th>
 													<th>Lãi suất</th>
@@ -276,7 +277,8 @@
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.bankAccountNumber}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.fullname}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.kindOfProfit}"></td>
-														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.originalMoney}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:utext="${@utilityAppication.formattedMoney(r.originalMoney)}"></td>
+                                                                                                                <td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:utext="${@utilityAppication.formattedMoney(r.resultMoney)}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.toDate}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.sTerm.numberOfMonth}+' tháng'"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.sTerm.interestRate}+' (%/năm)'"></td>

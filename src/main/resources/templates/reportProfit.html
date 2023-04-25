@@ -282,22 +282,26 @@
 												<tr>
 													<th>Mã sổ</th>
 													<th>Tên người vay</th>
-													<th>Số tiền vay</th>
+                                                                                                        <th>Số tiền vay gốc</th>
+													<th>Số tiền theo lãi suất hằng tháng(tính đến hiện tại)</th>
 													<th>ngày vay</th>
 													<th>Lãi suất (%/năm)</th>
+                                                                                                        <th>Tình trạng</th>
 												</tr>
 											</thead>
 											<tbody>					
 													<tr th:each="r: ${credits}">
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.bankAccountNumber}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.fullname}"></td>
-														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.money}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:utext="${@utilityAppication.formattedMoney(r.original_money)}"></td>
+                                                                                                                <td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:utext="${@utilityAppication.formattedMoney(r.money)}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.borrowDay}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.cTerm.interestRate}"></td>
+                                                                                                                <td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;"th:text="${r.status == true} ? 'chưa thanh toán' : 'đã thanh toán'">
 													</tr>
 											</tbody>
 										</table>
-                                                                            <label style="color: #707070; font-family: 'Open Sans'; font-size: 13px;">Tổng tiền lãi nhận về / năm (tiền gốc x lãi): </label>
+                                                                            <label><b>Lợi nhuận nhận về: </b></label>
                                                                             <span id="profit"></span>VNĐ
 									</div>
 								</div>
@@ -341,6 +345,23 @@
 	</div>
         <script>
             // JavaScript code
+            let profit = 0;
+            const salesTableBody = document.querySelector("#table tbody");
+            for (let i = 0; i < salesTableBody.rows.length; i++) {
+                const row = salesTableBody.rows[i];
+                if(row.cells[6].textContent === "đã thanh toán") {
+                    continue;
+                } else {
+                    
+                    let money = parseInt(row.cells[3].textContent.replace(".", "").replace(".", "").replace(".", "").replace(".", ""));
+                    let rate = parseFloat(row.cells[5].textContent);
+                    if(money === 0) {
+                        money = parseInt(row.cells[2].textContent.replace(".", "").replace(".", "").replace(".", "").replace(".", ""));
+                        profit = profit + money*rate/(100*12);
+                    } else profit = profit + money;
+                }
+            }
+            document.getElementById("profit").innerHTML = profit.toLocaleString('en-US').replace(/,/g, '.');
             function filterTable() {
                 const monthSelect = document.getElementById("month-select");
                 const selectedMonth = parseInt(monthSelect.value);
@@ -351,7 +372,7 @@
                 for (let i = 0; i < salesTableBody.rows.length; i++) {
                     const row = salesTableBody.rows[i];
 
-                    const date = row.cells[3].textContent;
+                    const date = row.cells[4].textContent;
                     const month = parseInt(date.split("-")[1]);
                     const year = parseInt(date.split("-")[0]);
             
@@ -362,17 +383,20 @@
                         else row.style.display = "none";
                     }
                 }
+                profit=0;
+                for (let i = 0; i < salesTableBody.rows.length; i++) {
+                    const row = salesTableBody.rows[i];
+                    if(row.style.display !== "none" && row.cells[6].textContent === "chưa thanh toán") {
+                        let money = parseInt(row.cells[3].textContent.replace(".", "").replace(".", "").replace(".", "").replace(".", ""));
+                        let rate = parseFloat(row.cells[5].textContent);
+                        if(money === 0) {
+                            money = parseInt(row.cells[2].textContent.replace(".", "").replace(".", "").replace(".", "").replace(".", ""));
+                            profit = profit + money*rate/(100*12);
+                        } else profit = profit + money;;
+                    }
+                    document.getElementById("profit").innerHTML = profit.toLocaleString('en-US').replace(/,/g, '.');
+                }
             }
-  
-            let profit = 0;
-            const salesTableBody = document.querySelector("#table tbody");
-            for (let i = 0; i < salesTableBody.rows.length; i++) {
-                const row = salesTableBody.rows[i];
-                let money = parseFloat(row.cells[2].textContent);
-                let rate = parseFloat(row.cells[4].textContent);
-                profit = profit + money*rate/100;
-            }
-            document.getElementById("profit").innerHTML = profit;
         </script>
 
 	<script src="paging/jquery.twbsPagination.js"></script>

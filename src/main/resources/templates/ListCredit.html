@@ -276,7 +276,7 @@
 														<td><input type="checkbox" id="checkbox_1" value="1"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.bankAccountNumber}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.bankAccountNumber.fullname}"></td>
-														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.money}"></td>
+														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:utext="${@utilityAppication.formattedMoney(r.original_money)}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.borrowDay}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.payDay}"></td>
 														<td style="color: #707070;font-family: 'Open Sans'; font-size: 13px;" th:text="*{r.mortgage}"></td>
