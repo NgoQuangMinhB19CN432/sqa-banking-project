@@ -40,8 +40,8 @@ public class RoleService implements IRoleService{
 		return roleRepository.findByCode(code);
 	}
 	@Override
-	public int update(int code,String name,String content,String status,int code2) {
-		return jdbc.update("update role set code=?, name=? , content=?, status=? where code=?", code,name,content,status,code2);
+	public int update(int code,String name,String content,String status,String mBy,String mDate,int code2) {
+		return jdbc.update("update role set code=?, name=? , content=?, status=?, modifiedby=?,modifieddate=? where code=?", code,name,content,status,mBy,mDate,code2);
 		
 	}
 //	private Role mapRowToProduct(ResultSet rs, int rowNum) throws SQLException {
