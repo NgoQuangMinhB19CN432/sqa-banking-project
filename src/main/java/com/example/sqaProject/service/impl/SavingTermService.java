@@ -65,9 +65,9 @@ public class SavingTermService implements ISavingTermService{
 		savingTermRepository.deleteBySavingId(i);
 	}
 	@Override
-	public int update(int savingId, float interest, int numberOfMonth, String status, int sv2) {
+	public int update(int savingId, float interest, int numberOfMonth, String status,String mBy,String mDate, int sv2) {
 		// TODO Auto-generated method stub
-		return jdbc.update("update saving_term set saving_term_id=?, interest_rate=? , number_of_month=?, status=? where saving_term_id=?", savingId,interest,numberOfMonth,status,savingId);
+		return jdbc.update("update saving_term set saving_term_id=?, interest_rate=? , number_of_month=?, status=?, modifiedby=?,modifieddate=? where saving_term_id=?", savingId,interest,numberOfMonth,status,mBy,mDate,savingId);
 	}
 
 }
