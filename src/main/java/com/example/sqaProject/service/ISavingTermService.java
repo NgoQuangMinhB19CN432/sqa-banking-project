@@ -11,5 +11,5 @@ public interface ISavingTermService {
 	void delete(SavingTerm savingTerm);
 	boolean checkDeleteSavingTerm(SavingTerm sv);
 	void deleteBySavingId(int i);
-	int update(int savingId,float interest,int numberOfMonth,String status,int sv2);
+	int update(int savingId,float interest,int numberOfMonth,String status,String mBy,String mDate,int sv2);
 }
