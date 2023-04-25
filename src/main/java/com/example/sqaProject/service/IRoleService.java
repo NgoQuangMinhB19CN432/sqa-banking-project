@@ -9,5 +9,5 @@ public interface IRoleService {
 	void save(Role role);
 	void delete(Role role);
 	Role findByCode(int code);
-	int update(int code,String name,String content,String status,int code2);
+	int update(int code,String name,String content,String status,String mBy,String mDate,int code2);
 }
