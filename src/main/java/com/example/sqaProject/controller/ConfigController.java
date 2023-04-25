@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import jakarta.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class ConfigController {
@@ -56,7 +58,7 @@ public class ConfigController {
 		return "createCreditRole";
 	}
 	@PostMapping("/saveRole")
-	public String createRoleT(Role role,BindingResult result,Model model) {
+	public String createRoleT(Role role,BindingResult result,HttpSession session,Model model) {
 		if(result.hasErrors()) {
     		model.addAttribute("message","please reenter to data");
     		model.addAttribute("role",role);
@@ -67,11 +69,16 @@ public class ConfigController {
 			model.addAttribute("role",role);
 			return "createRole";
 		}
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strDate = formatter.format(date);
+        role.setCreatedDate(strDate);
+        role.setCreatedBy((String)session.getAttribute("name"));
 		roleService.save(role);
 		return "redirect:/saving-config";
 	}
 	@PostMapping("/saveRoleCredit")
-	public String createRoleTC(Role role,BindingResult result,Model model) {
+	public String createRoleTC(Role role,BindingResult result,HttpSession session,Model model) {
 		if(result.hasErrors()) {
     		model.addAttribute("message","please reenter to data");
     		model.addAttribute("role",role);
@@ -82,6 +89,11 @@ public class ConfigController {
 			model.addAttribute("role",role);
 			return "createRole";
 		}
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strDate = formatter.format(date);
+        role.setCreatedDate(strDate);
+        role.setCreatedBy((String)session.getAttribute("name"));
 		roleService.save(role);
 		return "redirect:/credit-config";
 	}
@@ -102,7 +114,12 @@ public class ConfigController {
 			model.addAttribute("role",role);
 			return "editRole";
 		}
-		roleService.update(rol.getCode(), rol.getName(), rol.getContent(), rol.getStatus(), rol.getCode());
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strDate = formatter.format(date);
+        rol.setModifiedDate(strDate);
+        rol.setModifiedBy((String)session.getAttribute("name"));
+		roleService.update(rol.getCode(), rol.getName(), rol.getContent(), rol.getStatus(),rol.getModifiedBy(),rol.getModifiedDate(), rol.getCode());
 		return "redirect:/saving-config";
 	}
 	@GetMapping("/deleteRole{code}")
@@ -152,7 +169,12 @@ public class ConfigController {
 				model.addAttribute("saving", saving);
 				return "editSavingTerm";
 			}
-			savingTermService.update(sav.getSavingId(),sav.getInterestRate(),sav.getNumberOfMonth(),sav.getStatus(),sav.getSavingId());
+			Date date = new Date();
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+	        String strDate = formatter.format(date);
+	        sav.setModifiedBy((String) session.getAttribute("name"));
+	        sav.setModifiedDate(strDate);
+			savingTermService.update(sav.getSavingId(),sav.getInterestRate(),sav.getNumberOfMonth(),sav.getStatus(),sav.getModifiedBy(),sav.getModifiedDate(),sav.getSavingId());
 			return "redirect:/saving-config";
 	}
 	@GetMapping("/deleteSavingTerm{code}")
@@ -179,7 +201,7 @@ public class ConfigController {
 		return "createSavingTerm";
 	}
 	@PostMapping("/savingSave")
-	public String savingUpdate(SavingTerm savingTerm,BindingResult result,Model model) {
+	public String savingUpdate(SavingTerm savingTerm,BindingResult result,HttpSession session,Model model) {
 		if(result.hasErrors()) {
     		model.addAttribute("message","please re enter to data");
     		model.addAttribute("saving", savingTerm);
@@ -190,6 +212,11 @@ public class ConfigController {
 			model.addAttribute("saving", savingTerm);
 			return "editSavingTerm";
 		}
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strDate = formatter.format(date);
+        savingTerm.setCreatedBy((String) session.getAttribute("name"));
+        savingTerm.setCreatedDate(strDate);
 		savingTermService.save(savingTerm);
 		return "redirect:/saving-config";
 	}
@@ -226,7 +253,12 @@ public class ConfigController {
 			model.addAttribute("creditTerm", creditTerm);
 			return "editCreditTerm";
 		}
-		creditTermService.update(cre.getCreditId(), cre.getInterestRate(), cre.getNumberOfMonth(), cre.getStatus(), cre.getCreditId());
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strDate = formatter.format(date);
+        cre.setModifiedBy((String) session.getAttribute("name"));
+        cre.setModifiedDate(strDate);
+		creditTermService.update(cre.getCreditId(), cre.getInterestRate(), cre.getNumberOfMonth(), cre.getStatus(),cre.getModifiedBy(),cre.getModifiedDate(), cre.getCreditId());
 		
 		return "redirect:/credit-config";
 	}
@@ -254,7 +286,7 @@ public class ConfigController {
 		return "createCreditTerm";
 	}
 	@PostMapping("/creditSave")
-	public String creditUpdate(CreditTerm creditTerm,BindingResult result,Model model) {
+	public String creditUpdate(CreditTerm creditTerm,BindingResult result,HttpSession session,Model model) {
 		if(result.hasErrors()) {
     		model.addAttribute("message","please re enter to data");
     		model.addAttribute("creditTerm",creditTerm);
@@ -265,6 +297,11 @@ public class ConfigController {
 			model.addAttribute("creditTerm", creditTerm);
 			return "editSavingTerm";
 		}
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strDate = formatter.format(date);
+        creditTerm.setCreatedBy((String) session.getAttribute("name"));
+        creditTerm.setCreatedDate(strDate);
 		creditTermService .save(creditTerm);
 		return "redirect:/credit-config";
 	}
