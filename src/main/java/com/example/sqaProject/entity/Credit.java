@@ -18,26 +18,33 @@ import lombok.Setter;
 @Table(name = "credit")
 public class Credit {
     @Id
+    @Column(name="credit_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int creditId;
     
-    @Column(name="money")
-    private float money;
+    @Column(name="original_money")
+    private int original_money;
     
-    @Column(name="borrowDay")
+    @Column(name="money")
+    private int money;
+    
+    @Column(name="borrow_day")
     private String borrowDay;
     
-    @Column(name="payDay")
+    @Column(name="pay_day")
     private String payDay;
     
     @Column(name="mortgage")
     private String mortgage;
     
     @ManyToOne 
-    @JoinColumn(name = "bankAccountNumber")
+    @JoinColumn(name = "bank_account_number")
     private BankAccount bankAccountNumber;
     
     @ManyToOne
     @JoinColumn(name = "credit_term_id")
     private CreditTerm cTerm;    
+    
+    @Column(name="credit_status")
+    private boolean status;
 }
