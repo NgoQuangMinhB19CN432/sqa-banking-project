@@ -21,8 +21,17 @@ public class CreditTerm {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="credit_term_id")
-    private int creditId;
+        private int creditId;
 	
+        @Column(name = "createdby")
+	private String createdBy;
+	@Column(name = "createddate")
+	private String createdDate;
+	@Column(name = "modifiedby")
+	private String modifiedBy;
+	@Column(name = "modifieddate")
+	private String modifiedDate;
+        
 	@Column(name="interest_rate",nullable = false)
 	private float interestRate;
 	
@@ -33,5 +42,5 @@ public class CreditTerm {
 	private String status;
 	
 	@OneToMany(mappedBy = "cTerm")
-    private List<Credit> credits=new ArrayList<>();
+        private List<Credit> credits=new ArrayList<>();
 }
